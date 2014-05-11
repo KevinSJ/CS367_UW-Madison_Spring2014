@@ -1,0 +1,94 @@
+================================================================================
+1.
+a.
+    main begin
+    a begin
+    main caught Ex1
+    main finally
+    main end
+
+
+b.
+    main begin
+    a begin
+    b begin
+    b finally
+    b end
+    a end
+    b begin
+    b finally
+    b end
+    main finally
+    main end
+    
+
+c.
+    main begin
+    a begin
+    b begin
+    b finally
+    a caught Ex2
+    a end
+    b begin
+    b finally
+    main finally
+    Program terminated due to Exception Ex2
+
+
+d.
+    main begin
+    a begin
+    b begin
+    b caught ex3
+    b finally
+    b end
+    a end
+    b begin
+    b caught ex3
+    b finally
+    b end
+    main finally
+    main end
+    
+    
+e.
+    Must do either option 1 or option 2.
+    1. Add "throws Ex2" to declaration of b() AND EITHER add catch block for
+    Ex2 to try/catch blocks in main() OR add "throws Ex2" to declaration of
+    main().
+    
+    2. Add catch block for Ex2 to try/catch blocks in b() AND remove catch
+    block for Ex2 in a().
+
+
+================================================================================
+2.
+
+    public static void printData() {
+        // Declare DataStream object outside try/catch scope
+        DataStream s;
+
+        try {
+            // Try to initialize DataStream
+            s = new DataStream();
+        } catch (ConnectionFailedException ex) {
+            // If failure, print error and return
+            System.out.println("error connecting to instrument");
+            return;
+        }
+
+        try {
+            // Print each string returned by getData() until it returns null or
+            // throws TransmissionError
+            for (String data = s.getData(); data != null; data = s.getData()) {
+                System.out.println(data);
+            }
+        } catch (TransmissionError err) {
+            // If failure, print error
+            System.out.println("error reading instrument");
+        } finally {
+            // Always close the DataStream, regardless of termination condition
+            s.close();    
+        }
+    }
+

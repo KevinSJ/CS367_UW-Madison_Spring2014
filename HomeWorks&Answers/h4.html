@@ -1,0 +1,126 @@
+<content for="title">CS 367 h4</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h4</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, Feb 28th (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h4 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h4 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>2/21/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+<li><p>Assume you are comparing three different algorithms to solve some problem
+and you have determined the worst-case time equations for each:</p>
+<ul>
+    <li>Algorithm 1: <tt>T(N) = N<sup>2</sup> + N + 20</tt></li>
+    <li>Algorithm 2: <tt>T(N) = 1000N + 496</tt></li>
+    <li>Algorithm 3: <tt>T(N) = 20Nlog<sub>2</sub>N + 3N + 5</tt></li>
+</ul>
+<p><b>Answer the following questions</b> regarding these three algorithms.</p>
+<ol type="a">
+    <li>What is the worst-case time complexity (Big-O) for each algorithm?</li>
+    <li>Which algorithm has the lowest worst-case time complexity?</li>
+    <li>Should the algorithm with the lowest order of complexity always be used?
+    <b>Briefly</b> explain why or why not.</li>
+</ol>
+</li>
+<br>
+
+<li><p>Suppose the <tt>DblListnode&lt;E&gt;</tt> class is implemented as in the <a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Linked-Lists/index.html">readings</a>. The following class implements the <a href="http://pages.cs.wisc.edu/~cs367-1/resources/examples/ListADT.html">ListADT</a> using a circular doubly-linked chain of nodes:</p>
+<dir><pre><code>
+public class CircularDblLinkedList&lt;E&gt; implements ListADT&lt;E&gt; {
+
+    // Reference to the first node (position 0) of a circular doubly-linked
+    // chain of nodes. Recall that the next reference of the last node
+    // references the first node and the prev reference of the first node
+    // references the last node making the chain of nodes circular.
+    private DblListnode&lt;E&gt; items;
+    // The number of items in the list
+    private int numItems;
+
+    public CircularDblLinkedList() {
+        // Initially the list is empty
+        items = null;
+        numItems = 0;
+    }
+
+    // Return the item at position pos if pos is valid, otherwise throw
+    // IndexOutOfBoundsException. This method traverses the fewest nodes
+    // possible while locating the node at pos.
+    public E get(int pos) {
+        // IMPLEMENT THIS
+    }
+}
+</code></pre></dir>
+
+<p><b>Complete the <tt>get()</tt> method</tt> according to its
+specification.</b> For full credit, your solution
+<ul>
+    <li>must locate the node at <tt>pos</tt> in the most efficient manner
+    possible (i.e., call <tt>getNext()</tt> and <tt>getPrev()</tt> as few times
+    as possible);</li>
+    <li>must not modify the <tt>DblListnode</tt> class, the
+    <tt>CircularDblLinkedList</tt> class, or any method or field declarations
+    therein, except the body of the <tt>get()</tt> method;</li>
+    <li>must not change the contents or ordering of the nodes in the list during
+    execution.</li>
+</ul></p></li>
+<br>
+
+<li><p><b>Briefly answer the following questions assuming the list has N nodes.</b> Full credit is given for concise answers.</p>
+<ol type="a">
+    <li>What is the exact worst-case number of <tt>getNext()</tt> and
+    <tt>getPrev()</tt> calls required to locate a node in your implementation of
+    <tt>get()</tt> from Question 2?</li>
+    <li>What is the worst-case time (Big-O) of your implementation?</li>
+    <li>Suppose we had used a singly linked list instead of a doubly linked
+    list. What would be the exact worst-case number of <tt>getNext()</tt>
+    calls required to locate a node in this case?</li>
+    <li>What would be the worst-case time (Big-O) in the singly linked
+    case?</li>
+    <li>When is each implementation better than the other? Is one choice always
+    best?</li>
+</ol>
+</li>
+
+</ol>
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h4.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>

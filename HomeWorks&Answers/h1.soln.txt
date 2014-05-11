@@ -1,0 +1,72 @@
+================================================================================
+1.
+Part A
+
+    Trace: (i = 1, j = 3, myList = [A, B, C, D, E])
+        s = list.get(i);            // myList = [A, B, C, D, E]
+        list.add(i, list.get(j));   // myList = [A, D, B, C, D, E]
+        list.add(j, s);             // myList = [A, D, B, B, C, D, E]
+
+Part B
+
+    The following solution relies upon the fact that i < j:
+
+    void swap(int i, int j, ListADT<String> myList) {
+        s = list.remove(i);
+        list.add(i, list.remove(j-1));
+        list.add(j, s);
+    }
+
+
+================================================================================
+2.
+
+    public static <E> ArrayList<E> flatten(ArrayList<ArrayList<E>> myList) {
+        // Check that the list is not null
+        if (myList == null) {
+            throw new BadListException();
+        }
+        
+        // Create a new empty list to hold the elements of myList
+        ArrayList<E> newList = new ArrayList<E>();
+        
+        // Get an iterator over the lists in myList
+        Iterator<ArrayList<E>> listIterator = myList.iterator();
+        while (listIterator.hasNext()) {
+            // Get an iterator over the elements of the list
+            Iterator<E> elementIterator = listIterator.next().iterator();
+            while (elementIterator.hasNext()) {
+                E e = elementIterator.next();
+                
+                // Check if the element is already in the new list
+                boolean found = false;
+                Iterator<E> newListIterator = newList.iterator();
+                while (newListIterator.hasNext() && !found) {
+                    if (newListIterator.next().equals(e)) {
+                        // We found this element in the new list, so set the
+                        // flag and stop looking
+                        found = true;
+                    }
+                }
+                
+                // If this element was not found in the new list, add it to
+                // the end
+                if (!found) {
+                    newList.add(e);
+                }
+            }
+        }
+        
+        return newList;
+    }
+
+
+    Note that it's possible to write a correct solution which uses the
+    iterator's remove() method to remove duplicates from the flat list.
+    However, such a solution must be careful to meet the spec in the following
+    ways:
+        - it must NOT use the list's remove() method
+        - it must NOT modify the 2D input list
+        - it must leave elements in the order in which they first appeared 
+
+

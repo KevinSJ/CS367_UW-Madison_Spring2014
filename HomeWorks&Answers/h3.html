@@ -1,0 +1,90 @@
+<content for="title">CS 367 h3</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h3</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, Feb 21st (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h3 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h3 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>2/18/2014:</b> Update: Preconditions in Question 2 have been to
+    updated to specify that neither the <tt>d</tt> parameter nor the chain's
+    data are <tt>null</tt>.</li>
+    <li><b>2/14/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+
+<li><p><b>Complete the following method according to the specification.</b></p>
+<dir><pre><code>
+    // Insert a new Listnode&lt;E&gt; containing d after the first n Listnodes in
+    // chain. If n is less than 1 or bigger than the number of Listnodes in
+    // chain, throw IndexOutOfBoundsException.
+    // Precondition: chain has at least one node
+    //
+    // Examples:
+    //  chain: "A"           n: 1   d: "B"  chain: "A" -&gt; "B"
+    //  chain: "A" -&gt; "B"    n: 1   d: "C"  chain: "A" -&gt; "C" -&gt; "B"
+    //  chain: "A"           n: 2   d: "B"  IndexOutOfBoundsException
+    public static &lt;E&gt; void insertAfter(Listnode&lt;E&gt; chain, int n, E d) {
+</code></pre></dir>
+</li>
+
+<li><p><b>Complete the following method according to the specification.</b></p>
+<p><i>Hint: Consider using two references to step through the chain of nodes and think carefully about when to advance them.</i></p>
+<dir><pre><code>
+    // Remove all nodes in the chain whose data is equal to d (as determined by
+    // the equals() method of the E class).
+    // Preconditions: chain is not null and uses a header node (the first
+    // Listnode does not contain any data), no data in the chain after the
+    // header node is null, d is not null
+    //
+    // Examples (Hdr means header node):
+    //      chain: "Hdr"                   d: "A"  chain: "Hdr"
+    //      chain: "Hdr" -&gt; "A"            d: "A"  chain: "Hdr"
+    //      chain: "Hdr" -&gt; "A" -&gt; "B"     d: "A"  chain: "Hdr" -&gt; "B"
+    //      chain: "Hdr" -&gt; "A" -&gt; "A"     d: "A"  chain: "Hdr"
+    public static &lt;E&gt; void removeAll(Listnode&lt;E&gt; chain, E d) {
+</code></pre></dir>
+</li>
+
+
+</ol>
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h3.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>

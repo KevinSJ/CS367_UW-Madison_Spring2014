@@ -1,0 +1,249 @@
+<content for="title">CS 367 h10</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h10</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, May 9th (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h10 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h10 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>5/2/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+<!-- QUESTION 1 -->
+<li><p>Consider the following undirected graph represented in adjacency matrix
+form with nodes having character labels and edges having non-negative integer
+weights (no value indicates no edge exists):</p>
+<dir><pre>
+    A B C D E F G
+  +--------------
+A |   1     4
+B | 1   9   2
+C |   9   2 5 1
+D |     2   9   6
+E | 4 2 5 9   3
+F |     1   3   4
+G |       6   4
+</pre></dir>
+<!--
+<p>The graph is given in adjacency matrix form, where the number in entry (u,v)
+indicates that node u is connected to node v with an edge having that weight.
+An empty entry indicates the edge is not present. Note that, since the graph is
+undirected, each edge is represented twice in the matrix: once as (u,v) and once
+as (v,u). Both entries indicate one and the same edge.</p>
+-->
+
+<p>Trace Dijkstra's algorithm, starting at node A, by filling in the remaining
+rows in the table below.  Each row in the table represents one iteration of the
+algorithm, so use as many rows as needed for the algorithm to complete.</p>
+
+<dir>
+<table class="reg" border="1" cellpadding="2" cellspacing="0" width="80%">
+<tbody>
+<tr>
+<th width="50%">Visited Vertexes and their<br> shortest distances from start</th>
+<th width="50%">Priority Queue's items<br> (listed in increasing order)</th>
+</tr>
+<tr>
+  <td>-</td>
+  <td>(0,A)</td>
+</tr>
+<tr>
+  <td>A-0</td>
+  <td>(1,B), (4,E)</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</dir>
+</li>
+<br>
+
+<!-- QUESTION 2 -->
+<li><p>Consider the following partial implementation of a directed graph data
+structure:</p>
+<dir><pre><code>
+public class Graph&lt;T&gt; {
+    // *** fields ***
+    ...
+
+    // *** methods ***
+
+    // Returns all the nodes in this graph as a set.
+    public Set&lt;Graphnode&lt;T&gt;&gt; getNodes() { ... }
+
+    // Returns all of the nodes in this graph which have no incoming edges.
+    public Set&lt;Graphnode&lt;T&gt;&gt; getOrphans() {
+        // IMPLEMENT THIS
+    }
+
+    // *** other methods ***
+    ...
+}
+
+
+class Graphnode<T> {
+    // *** fields ***
+    ...
+
+    // Returns all of the successors of this node as a set.
+    public Set&lt;Graphnode&lt;T&gt;&gt; getSuccessors() { }
+
+    // *** other methods ***
+    ...
+}
+</code></pre></dir>
+<p><b>Complete the <tt>getOrphans</tt> method,</b> which returns a set of all
+the nodes in the graph which have no incoming edges. For full credit, your
+solution
+<ul>
+    <li>must be at most 18 lines of code, and may be fewer;</li>
+    <li>must not modify the <tt>Graph</tt> or <tt>Graphnode</tt> class in any
+    way, except the body of the <tt>getOrphans</tt> method;</li>
+    <li>must use only primitive types, the <tt>Graphnode&lt;T&gt;</tt> or
+    <tt>Graph&lt;T&gt;</tt> class, or Java's <tt><a href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a></tt>
+    interface or <tt><a href="http://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html">HashSet</a></tt> class; and</li>
+    <li>must not modify the graph structure in any way.</li>
+</ul>
+</li>
+<br>
+
+<!-- QUESTION 3 -->
+<li><p>It is often desirable to sort a list of objects by more than one field,
+or <i>key</i>, belonging to each object. For example, we might like to sort a
+list of names alphabetically by last name (the first key) and then sort
+individuals sharing the same last name by their first names (the second key).
+This is how names in a phonebook are sorted: if you want to look up "Jane Roe"
+you first search alphabetically by last name until you find everyone with the
+last name "Roe". Then, within those names, you search alphabetically by first
+name until you find "Jane".</p>
+<!--Or
+think of a <a href="http://en.wikipedia.org/wiki/Standard_52-card_deck">standard
+    52-card deck</a> of playing cards: each card is identified by both a rank
+and a suit. There are four suits (clubs, diamonds, hearts, and spades) and 13
+ranks (2-10, jack, queen, king and ace). In many games, the ranks and suits are
+ordered as shown above (so spades is the highest suit and ace is the highest
+rank). We can then sort a set of cards by suit, and then by rank within the
+suit. The result would be a set of cards with all of the clubs first, followed
+by the diamonds, and so on. Within each suit, the cards would be in order of
+increasing rank, starting with twos, threes, and finally kings and aces-->
+
+<p>One means of sorting by several keys is to apply a standard sorting algorithm
+several times, comparing the items by a different key each time. In the name
+example, we could sort a list of names by first name, and then sort the
+resulting list by last name. The first pass puts all of the first names in order
+relative to one another; the second pass puts all of the last names in order.
+However, if we are to get the result we want, the second pass cannot change the
+order of people who share the same last name, since they are already sorted by
+first name. A sorting algorithm that preserves the original order of
+equal-valued items is called <i>stable</i>.</p>
+
+<p>For example, consider the following list of tuples (pairs) of letters and
+numbers:
+<dir><pre>
+(D,1), (A,2), (D,3), (B,4), (A,5), (C,6), (A,7)
+</pre></dir>
+<p>Note that the list is already sorted by number. If we were to use a stable
+algorithm to sort by letter, we would get</p>
+<dir><pre>
+(A,2), (A,5), (A,7), (B,4), (C,6), (D,1), (D,3)
+</pre></dir>
+<p>Within elements that have the same letter, the tuples are also sorted by
+number: (A,2) comes before (A,5), and so on.</p>
+<p><b>Part A:</b> Sort the first list, comparing by letter, using
+<a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Sorting/index.html#merge">mergesort</a>.
+<ol type="i">
+    <li>Write down the initial list. Show the location of the first division by
+    inserting a vertical bar (|) between the left half and right half. Show the
+    additional divisions made by each level of recursion (see the diagram
+    following <a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Sorting/index.html#youtry3">Test Yourself #3</a>
+    in the readings).</li>
+    <li>Show the results of merging at each level of recursion (again, see the
+    diagram in the readings). Continue to indicate the separation between
+    divisions with vertical bars, as above.</li>
+    <li>Is mergesort stable?</li>
+</ol></p>
+<p><b>Part B:</b> Sort the first list, comparing by letter, using
+<a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Sorting/index.html#quick">quicksort</a>
+with the median-of-three technique.
+<ol type="i">
+    <li>Write down the initial list. Indicate the tuples considered by
+    median-of-three by putting square brackets ([]) around each of those three
+    tuples.</li>
+    <li>Show the list after re-arranging the above three values (i.e., after
+    Step 1 completes). Show the pivot by putting asterisks (*) on either side of
+    it.</li>
+    <li>For each swap performed by the partitioning step (Step 3), show the list
+    as it is immediately after the swap.</li>
+    <li>Finally, show the list after putting the pivot in its place (Step 4).
+    Also, place an "L" or an "R" immediately before the tuples pointed to by the
+    left and right pointers, respectively.</li>
+    <li>Use insertionsort to sort the two pieces of the list. (You do not need
+    to show your steps, just the final result.)</li>
+    <li>Is quicksort with median-of-three and insertionsort stable?</li>
+</ol></p>
+</li>
+</ol>
+
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h10.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>

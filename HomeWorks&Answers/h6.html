@@ -1,0 +1,154 @@
+<content for="title">CS 367 h6</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h6</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, Mar 28th (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h6 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h6 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>3/22/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+<!-- QUESTION 1 -->
+<li><p>Consider the following recursive definition of the <tt>insertAfter</tt>
+method you implemented in h3 which adds nodes to a chain of <a
+    href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Linked-Lists/index.html#ll">Listnode</a> objects.</p>
+<dir><pre><code>
+public static &lt;E&gt; Listnode&lt;E&gt; insertAfterRec(Listnode&lt;E&gt; chain, int n, E d) {
+    if (n == 0) {
+        return new Listnode&lt;E&gt;(d, chain);
+    } else if (chain != null &amp;&amp; n &gt; 0) {
+        chain.setNext(insertAfterRec(chain.getNext(), n-1, d));
+        return chain;
+    } else {
+        throw new IndexOutOfBoundsException();
+    }
+}
+</code></pre></dir>
+<p>Note that, unlike in h3, this implementation allows nodes to be added at the
+very beginning of a chain (i.e., <tt>n == 0</tt> is allowed).</p>
+
+<p>Analyze the time complexity for the recursive <tt>insertAfterRec</tt>
+method:</p>
+<ol type="a">
+    <li><b>Identify the problem size</b> that affects the method's runtime.</li>
+    <li><b>Write the recurrence equations</b> for base and recursive cases.</li>
+    <li><b>Determine the solution</b> by looking for a pattern in the
+    table.</li>
+    <li><b>Verify the solution</b> by substituting it into the recurrence
+    equation.</li>
+    <li><b>Determine the method's complexity</b> by expressing the solution in
+    Big-O notation.</li>
+</ol>
+</li>
+<br>
+
+<!-- QUESTION 2 -->
+<li><p>Consider the following recursive method.</p>
+<dir><pre><code>
+public static void mystery(int h, int d) {
+    if (h &gt; 1) mystery(h-1, d+1);
+    
+    for (int i = 0; i &lt; h; i++)
+        System.out.print("  ");
+    System.out.println(d);
+    
+    if (h &gt; 1) mystery(h-1, d+1);
+}
+</code></pre></dir>
+
+<p><b>Answer the following questions</b> regarding the <tt>mystery</tt>
+method:</p>
+<ol type="a">
+    <li>What output is produced by calling <tt>mystery(3, 1)</tt>?</li>
+    <li>Which parameter(s) determine(s) the method's runtime?</li>
+    <li>What are the recurrence equations? (Remember both the base case and the
+    recursive case.)</li>
+    <li>What is the solution to the recurrence?<br><i>Hint:</i> try the
+    following solutions:<ul><li>2<sup>N-1</sup> -
+        1</li><li>N(N+1)/2</li><li>2<sup>N+1</sup> - N -
+        2</li><li>N(log<sub>2</sub>N + 1)</li></ul></li>
+    <li>Suppose some method <tt>foo()</tt> makes the call <tt>mystery(6,
+        3)</tt>. What is the maximum number of activation records belonging to
+    <tt>mystery()</tt> that will simultaneously exist on the call stack before
+    control returns to <tt>foo()</tt>?</li>
+</ol>
+</li>
+<br>
+
+<!-- QUESTION 3 -->
+<li><p>For this question you will implement a <i>recursive</i> version of the
+<tt>removeAll</tt> method you implemented in h3. However, unlike in h3, you may
+NOT assume that this chain uses a header node.</p>
+
+<p><b>Part A: Complete the English description for the base case and
+recursive cases</b> for the <tt>removeAllRec</tt> method. (See Part B for
+specification.)</p>
+<ul>
+    <li>If the first node is <tt>null</tt>...</li>
+    <li>Otherwise, if the first node...</li>
+    <li>Otherwise...</li>
+</ul>
+<br>
+
+<p><b>Part B: Complete the recursive <tt>removeAllRec</tt> method.</b> Part of
+the grade for this question will be based on how well your recursive solution
+is coded. Your solution should not be more than 15 lines of code and may be
+fewer.</p>
+
+<dir><pre><code>
+// Unlinks every node in chain that has data equal to d (as determined by the
+// equals() method of the E class). Returns a reference to the first node in the
+// chain whose data is not equal to d. Returns null if chain is null or every
+// node in chain has data equal to d. Does not create new Listnode objects.
+// Preconditions: no data in the chain is null, d is not null.
+//
+// Examples (note there is NO header node):
+//      chain: "A"                     d: "A"  returns: null
+//      chain: "B"                     d: "A"  returns: "B"
+//      chain: "A" -&gt; "B"              d: "A"  returns: "B"
+//      chain: "A" -&gt; "A"              d: "A"  returns: null
+public static &lt;E&gt; Listnode&lt;E&gt; removeAllRec(Listnode&lt;E&gt; chain, E d) {
+</code></pre></dir>
+</li>
+</ol>
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h6.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>

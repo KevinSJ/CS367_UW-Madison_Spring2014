@@ -1,0 +1,87 @@
+================================================================================
+1.
+    a. N
+
+    b. ceiling(N/2)
+
+    c. floor(log_2 N) + 1
+ 
+    d. ceiling(N/2)
+
+
+================================================================================
+2.
+    a.     4
+          / \
+         2   5
+        / \   \
+       1   3   7
+              / \
+             6   8
+
+    b.       8
+            / \
+           6   13
+          /   / 
+         5   12
+        /   /
+       3   10
+        \   \
+         4   11
+
+    c.     4            OR      4
+          / \                  / \
+         3   5                1   5
+        /     \                \   \
+       1       7                3   7
+              / \                  / \
+             6   8                6   8
+
+    d.       10         OR       6
+            / \                /   \
+           6   13             5     13
+          /   /              /      /
+         5   12             3      12
+        /   /                \    /
+       3   11                 4  10
+        \                         \
+         4                         11
+
+
+================================================================================
+3.
+    a.  i. Binary Search Tree
+       ii. The first and last names appearing on the page and the page number.
+      iii. For each page, all of the pages in its left subtree must come before
+           it, and all pages in the right subtree must come after.
+       iv. It must be (nearly) balanced.
+
+    b. 
+        // the first name on the page
+        String earliestName;
+        // the last name on the page
+        String latestName;
+        // the page number
+        int page;
+        
+        // Reference to the left (earlier) subtree
+        Page leftChild;
+        // Reference to the right (later) subtree
+        Page rightChild;
+    
+    c.
+        public int lookupName(String name) {
+            if (earliestName.compareTo(name) > 0) {
+                if (leftChild == null) {
+                    throw new NoSuchElementException();
+                }
+                return leftChild.lookupName(name);
+            } else if (latestName.compareTo(name) < 0) {
+                if (rightChild == null) {
+                    throw new NoSuchElementException();
+                }
+                return rightChild.lookupName(name);
+            }
+            return page;
+        } 
+

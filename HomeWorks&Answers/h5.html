@@ -1,0 +1,158 @@
+<content for="title">CS 367 h5</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h5</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, Mar 14th (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h5 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h5 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>3/11/2014:</b> Do not use tab characters in your answers when drawing your tree for #3b.</li>
+    <li><b>3/7/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+<!-- QUESTION 1 -->
+<li><p><b>Answer the following questions</b> about the <a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Trees/intro.html">tree</a> shown
+below:
+<dir><pre>
+        A
+       / \
+      B   C
+     /   /|\
+    D   E F G
+   /|    / \
+  H I   J   K
+</pre></dir>
+<ol type="a">
+    <li>How many nodes does this tree have? how many edges?</li>
+    <li>Which node is the root of this tree?</li>
+    <li>Which node is the parent of node B?</li>
+    <li>Which nodes are children of node C?</li>
+    <li>Which nodes are leaves of the tree?</li>
+    <li>What is the depth of node D?</li>
+    <li>What is the height of the tree?</li>
+    <li>Give the nodes along a path from node F to node B. How long is this
+    path?</li>
+    <li>Which nodes are the descendants of node C?</li>
+</ol>
+</li>
+<br>
+
+<!-- QUESTION 2 -->
+<li><p>Consider the following incomplete code fragment: </p>
+<dir><pre><code>
+int[] arr = {6, 7, 1, 3, 5, 8, 2, 4};
+<u>STATEMENT1</u>
+
+for (int i = 0; i < arr.length; i++) {
+    <u>STATEMENT2</u>
+}
+
+while (<u>COND</u>) {
+    System.out.print(<u>EXPR</u> + ", ");
+}
+</code></pre></dir>
+<p>For parts (a) through (c), <b>give the output of the above code</b> if the
+underlined expressions are completed as given. Assume that <tt><a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Stacks-and-Queues/index.html#stacks">Stack</a></tt> is implemented using a linked list,
+<tt><a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Stacks-and-Queues/index.html#queues">Queue</a></tt> is implemented using an array, and
+<tt><a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Priority-Queues/index.html">PriorityQueue</a></tt> is implemented using a heap.</p>
+    <ol type="a">
+        <li><tt><table>
+                <tr><td><u>STATEMENT1</u>:</td><td>Stack&lt;Integer&gt;
+                        s = new Stack&lt;Integer&gt;();</td></tr>
+                <tr><td><u>STATEMENT2</u>:</td><td>s.push(arr[i]);</td></tr>
+                <tr><td><u>COND</u>:</td><td>!s.isEmpty()</td></tr>
+                <tr><td><u>EXPR</u>:</td><td>s.pop()</td></tr>
+        </table></tt></li>
+        <li><tt><table>
+                <tr><td><u>STATEMENT1</u>:</td><td>Queue&lt;Integer&gt;
+                        q = new Queue&lt;Integer&gt;();</td></tr>
+                <tr><td><u>STATEMENT2</u>:</td><td>q.enqueue(arr[i]);</td></tr>
+                <tr><td><u>COND</u>:</td><td>!q.isEmpty()</td></tr>
+                <tr><td><u>EXPR</u>:</td><td>q.dequeue()</td></tr>
+        </table></tt></li>
+        <li><tt><table>
+                <tr><td><u>STATEMENT1</u>:</td><td>PriorityQueue&lt;Integer&gt;
+                        pq = new PriorityQueue&lt;Integer&gt;();</td></tr>
+                <tr><td><u>STATEMENT2</u>:</td><td>pq.enqueue(arr[i]);</td></tr>
+                <tr><td><u>COND</u>:</td><td>!pq.isEmpty()</td></tr>
+                <tr><td><u>EXPR</u>:</td><td>pq.dequeue()</td></tr>
+        </table></tt></li>
+        <li>Suppose we replace <tt>arr</tt> with an array of N integers. For
+        each of the above three cases, <b>give the worst-case time complexity
+            (Big-O) of the code fragment</b>. (Neglect the time required to
+        create <tt>arr</tt>, and assume <tt>System.out.print</tt> takes constant
+        time.)</li>
+    </ol>
+</li>
+<br>
+
+<!-- QUESTION 3 -->
+<li>
+<ol type="a">
+    <li>Using the same format as in part (b), <b>show the array</b>
+    corresponding to the following heap represented as a tree:
+    <dir><pre>
+        9
+      /   \
+    4       8
+   / \     / \
+  3   2   5   7
+ / \
+1   3
+    </pre></dir></li>
+    <li>Using the same format as in part (a), <b>show the tree</b> corresponding
+    to the following heap represented as an array (the array is 0 indexed):
+    <dir><pre>
+0, 9, 7, 8, 4, 3, 7, 5, 2</pre></dir>
+    Only use space characters in your answer. <b>Do not use tab characters</b>
+    since they may result in incorrect spacing.</li>
+    <li><b>Show the result</b> (as an array) of running <tt>enqueue(8)</tt> on
+    the heap in part (a).</li>
+    <li><b>Show the result</b> (as an array) of running <tt>enqueue(10)</tt> on
+    the heap in part (b).</li>
+    <li><b>Show the result</b> (as an array) of running <tt>dequeue()</tt> on
+    the heap in part (a).</li>
+    <li><b>Show the result</b> (as an array) of running <tt>dequeue()</tt> on
+    the heap in part (b).</li>
+</ol></li>
+</ol>
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h5.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>

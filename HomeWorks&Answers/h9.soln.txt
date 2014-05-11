@@ -1,0 +1,71 @@
+================================================================================
+1.
+    a.  i. 1, 2, 5, 7, 3, 4, 8, 9, 6
+
+       ii. 1 : 2, 5, 7
+           2 : 3, 4
+           3 :
+           4 : 6
+           5 : 8
+           6 :
+           7 : 9
+           8 :
+           9 :
+
+    b.  i. 1, 2, 3, 4, 6, 9, 5, 8, 7
+
+       ii. 1 : 2, 7
+           2 : 3, 4, 5
+           3 :
+           4 : 6
+           5 : 8
+           6 : 9
+           7 :
+           8 :
+           9 :
+
+
+================================================================================
+2.
+    All of the following are correct numberings:
+
+    3, 4, 2, 6, 1, 5
+    3, 4, 6, 1, 2, 5
+    3, 4, 6, 2, 1, 5
+    3, 6, 4, 1, 2, 5
+    3, 6, 4, 2, 1, 5
+
+
+================================================================================
+3.
+    public Set<Pixel> getSegment(int row, int col, double threshold) {
+        HashSet<Pixel> segment = new HashSet<Pixel>();
+        segment.add(pixelData[row][col]);
+
+        LinkedList<Pixel> stack = new LinkedList<Pixel>();
+        stack.push(pixelData[row][col]);
+
+        boolean visited[][] = new boolean[height][width];
+        visited[row][col] = true;
+
+        while (!stack.isEmpty()) {
+            Pixel current = stack.pop();
+            // for (Pixel p : current.getNeighbors()) {
+            // three lines below could be replaced by 'for each' loop above
+            Iterator<Pixel> pItr = current.getNeighbors().iterator();
+            while (pItr.hasNext()) {
+                Pixel p = pItr.next();
+                if (visited[p.getRow()][p.getCol()]) continue;
+                
+                double difference = p.getIntensity() - current.getIntensity();
+                if (Math.abs(difference) <= threshold) {
+                    visited[p.getRow()][p.getCol()] = true;
+                    stack.push(p);
+                    segment.add(p);
+                }
+            }        
+        }
+
+        return segment;
+    } 
+

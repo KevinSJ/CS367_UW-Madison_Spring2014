@@ -1,0 +1,235 @@
+<content for="title">CS 367 h8</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h8</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, Apr 11th (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h8 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h8 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>4/4/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+<!-- QUESTION 1 -->
+<li><p><b>Answer the following questions</b> about a <a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Trees/intro.html">binary tree</a> with
+N nodes. Give exact answers, i.e. not using Big-O notation. (Recall that a
+binary tree is <b>balanced</b> if, for every node, the height of the left or
+right subtree is at most one more than the height of the other subtree.
+Equivalently, the height of the tree is as small as possible.)</p>
+<p><i>Hint:</i>You may find the following functions useful in expressing your
+answers: <a
+href="http://en.wikipedia.org/wiki/Floor_and_ceiling_functions">floor and
+ceiling functions</a></p>
+    <ol type="a">
+    <li>What is the maximum height of the tree?</li>
+    <li>What is the maximum number of leaves?</li>
+    <li>What is the maximum height of the tree if it is balanced?</li>
+    <li>What is the maximum number of leaves if the tree is balanced?</li>
+    </ol>
+</li>
+<br>
+
+<!-- QUESTION 2 -->
+<li><p><b>Answer the following questions</b> about a standard <a
+    href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Binary-Search-Trees/index.html">binary search
+    tree</a>.</p>
+<ol type="a">
+    <li>Show the binary search tree that results from inserting the following
+    sequence of integers into a tree that is initially empty:
+    <dir><pre>
+    4, 2, 5, 7, 1, 6, 3, 8
+    </pre></dir></li>
+    <li>Show the binary search tree that results from inserting the following
+    sequence of integers into a tree that is initially empty:
+    <dir><pre>
+    8, 13, 12, 6, 10, 5, 11, 3, 4
+    </pre></dir></li>
+    <li>Show the binary search tree that results from deleting 2 from the tree
+    in part (a).</li>
+    <li>Show the binary search tree that results from deleting 8 from the tree
+    in part (b).</li>
+</ol>
+</li>
+<br>
+
+<!-- QUESTION 3 -->
+<li><p>Suppose you are implementing a data structure to store an index for a
+directory of names. Each name is located on a particular page, identified by an
+integer page number. You can imagine that each name has some associated data,
+such as contact information, but that is not relevant to the index: you just
+need to perform fast lookups of the page that a particular name should be found
+on. The names are arranged in lexicographical order.
+</p>
+
+<p>For example, suppose the the directory looks like the following:
+<dir><pre>
+Page 1
+--------------------------------
+Adams
+Arthur
+Buchanan
+Bush
+
+Page 2
+--------------------------------
+Carter
+Cleveland
+Clinton
+Coolidge
+Eisenhower
+</pre></dir>
+Note that there are no duplicates! Each name appears at most once.</p>
+
+<p>The index lookup, which you will implement, should work as follows. Given a
+name, it returns the page on which that name should be found, <i>if it is in the
+directory at all</i>. That is, the index does NOT keep track of every name in
+the directory, but it can determine which page a name might be found on. It does
+this by storing the first and last name found on each page. In order to
+determine which page a supplied name should be found on, it finds a page such
+that the supplied name occurs lexicographically between the first and last names
+on the page. In the above example, If we were to look up the name "Adams", we
+should find that it is located on page 1, if it's in the directory (which it
+is). If we were to look up "Davis", we would find that it should be located on
+page 2, if it's in the directory (which it is not). If we were to look up
+"Campbell" we would find that it is not in the directory: "Campbell" should
+occur after "Bush" and before "Carter", but there is no page which could contain
+this name.</p>
+
+<p>The index is implemented as a Java class. It has the following (partial)
+implementation:
+<dir><pre><code>
+import java.util.NoSuchElementException;
+
+public class Index {
+    Page root;
+    
+    // Returns the page number on which name should be found, or throws
+    // NoSuchElementException if name cannot be located on any page in the
+    // index. A name should be found on a given page if it is lexicographically
+    // between the first and last name contained on that page (inclusive), as
+    // determined by the compareTo() method of the String class.
+    // Precondition: name is not null
+    public int lookupName(String name) {
+        if (root == null) {
+            throw new NoSuchElementException();
+        }
+        return root.lookupName(name);
+    }
+
+    // ...
+}
+</code></pre></dir>
+You do not need to modify the <tt>Index</tt> class. The following is a template
+for the <tt>Page</tt> class which <tt>Index</tt> uses to store data about pages.
+<dir><pre><code>
+import java.util.NoSuchElementException;
+
+public class Page {
+    // PART B: ADD PRIVATE FIELDS
+    
+    public int lookupName(String name) {
+        // PART C: IMPLEMENT THIS
+    }
+    
+    // ... You do NOT need to implement the remainder of the class
+}
+</code></pre></dir>
+</p>
+
+<p>Your task is to design the <tt>Page</tt> class and implement its
+<tt>lookupName()</tt> method. Besides correctness, the most important goal is
+speed. If the index contains N pages, your design should support worst-case
+lookups in time O(log N) under certain conditions, which you will describe
+below. You may assume that
+<ul>
+    <li>names in the index are ordered lexicographically according to the
+    compareTo() method of the String class,</li>
+    <li>each name appears on at most one page, and</li>
+    <li>the directory is static: names will not be added or removed</li>
+</ul></p>
+
+<p><b>Part A: Briefly describe the structure</b> of the index by answering the
+following questions:
+<ol type="i">
+    <li>Which data structure studied in class does your index most closely
+    resemble? (Be specific.)</li>
+    <li>What data about a page must each <tt>Page</tt> instance store?</li>
+    <li>How are <tt>Page</tt> instances arranged relative to one another? (Be
+    specific.)</li>
+    <li>What must be true about your data structure in order to achieve O(log N)
+    worst-case lookup times? (You do NOT need to enforce this condition, just
+    describe it.)</li>
+</ol>
+Full credit is given for concise answers; each answer should be one sentence.
+</p>
+
+<p><b>Part B: List the private fields</b> of your <tt>Page</tt> class. Use
+correct Java syntax and descriptive names. You may not use any type other
+than <tt>Page</tt>, <tt>String</tt>, or any primitive type. You may not use
+arrays, lists, or other data structures. In order to receive full credit, you
+must use at most six fields (and may use fewer) and you <b>MUST</b> use
+a descriptive name AND provide a short (one line) descriptive comment for each
+field.
+
+<p><b>Part C: Implement <tt>lookupName()</tt></b>. In order to receive full
+credit, your implementation
+<ul>
+    <li>must return the page number on which a name should be found, if
+    any;</li>
+    <li>must throw <tt>NoSuchElementException</tt> if no page exists such that
+    the given name occurs lexicographically between the page's first and last
+    names;</li>
+    <li>must complete lookup operations in O(log N) time, where N is the number
+    of pages in the index (assuming the condition you described in Part A);
+    and</li>
+    <li>must be at most 25 lines of code, and may be fewer.</li>
+</ul>
+Note that you do NOT need to implement the constructor or a means of
+initializing your data structure. You may assume that it has been created as you
+described in Part A.
+</p><p>
+<i>Hint:</i> if the current <tt>Page</tt> doesn't contain <tt>name</tt>, make a
+recursive call.
+</p>
+</li>
+</ol>
+
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h8.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>

@@ -1,0 +1,169 @@
+<content for="title">CS 367 h2</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h2</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, Feb 14th (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h2 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h2 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>2/12/2014:</b> Clarification: <tt>ConnectionFailedException</tt> and
+    <tt>TransmissionError</tt> are checked exceptions.</li>
+    <li><b>2/7/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+
+<li>Consider the following pseudo-code:
+
+<dir><pre>
+void main() {
+    println("main begin");
+    try {
+        a();
+        b();
+    } catch (Ex1 ex) {
+        println("main caught Ex1");
+    } catch (Ex3 ex) {
+        println("main caught Ex3");
+    } finally {
+        println("main finally");
+    }
+    println("main end");
+}
+
+void a() {
+    println("a begin");
+    try {
+        if (var1) {
+            b();
+        } else {
+            throw new Ex1();
+        }
+    } catch (Ex2 ex) {
+        println("a caught Ex2");
+    }
+    println("a end");
+}
+
+void b() {
+    println("b begin");
+    try {
+        if (var2) throw new Ex2();
+        if (var3) throw new Ex3();
+    } catch (Ex3 ex) {
+        println("b caught ex3");
+    } finally {
+        println("b finally");
+    }
+    println("b end");
+}</pre></dir>
+
+<p>For each part below <b>determine the complete output</b> that would be
+output if the pseudo-code above was run with the values of the <tt>var</tt>
+variables as specified below. Assume the exception classes <tt>Ex1</tt>,
+<tt>Ex2</tt>, and <tt>Ex3</tt> each extend <tt>RuntimeException</tt>. If an
+exception is passed out of main, show the output of the runtime environment
+as "<tt>Program terminated due to Exception Ex<i>N</i></tt>&nbsp; ", where N
+is the particular exception number.</p>
+
+<ol type="a">
+  <li>What would be output if <tt>var1</tt>, <tt>var2</tt>, and <tt>var3</tt> are all false?</li>
+  <li>What would be output if <tt>var1</tt> is true and <tt>var2</tt> and <tt>var3</tt> are false?</li>
+  <li>What would be output if <tt>var1</tt> and <tt>var2</tt> are true and <tt>var3</tt> is false?</li>
+  <li>What would be output if <tt>var1</tt> and <tt>var3</tt> are true and <tt>var2</tt> is false?</li>
+  <li>How would the code need to be modified if exception type <tt>Ex2</tt> were a <em><i>checked</i></em> exception?</li>
+</ol>
+<br />
+</li>
+
+
+<li><p>Suppose you're a scientist writing code to handle data from a particular
+instrument. The instrument is supplied with a Java class called
+<tt>DataStream</tt> that provides access to the instrument's data.
+<tt>DataStream</tt> has the following methods:
+<dir><pre><code>
+// Constructor: creates a new connection to the instrument in preparation for
+// reading data. Throws ConnectionFailedException if the connection cannot be
+// established for any reason.
+public DataStream() throws ConnectionFailedException
+
+// Reads a line of data from the instrument if data is available. If data is
+// not available, returns null. Throws TransmissionError if any error occurs
+// while communicating with the instrument.
+public String getData() throws TransmissionError
+
+// Closes the connection. Must be called exactly once after the DataStream
+// object is successfully created and before the program terminates.
+public void close()
+</code></pre></dir>
+Assume <tt>ConnectionFailedException</tt> and <tt>TransmissionError</tt> are
+checked exceptions.
+</p>
+
+<p>Your job is to read data from the instrument and print it to the screen.
+<b>Complete the <tt>printData</tt> method below so that it prints data,
+handling exceptions properly.</b> The following outline creates a new
+<tt>DataStream</tt> object, reads and prints each line of data, and then
+closes the <tt>DataStream</tt>.</p>
+
+<p> In order to receive full credit, your solution
+<ul>
+<li>must NOT throw any checked exceptions from <tt>printData</tt>;</li>
+<li>must print "error connecting to instrument" and return if the constructor raises <tt>ConnectionFailedException</tt>;</li>
+<li>must print each string returned by <tt>getData()</tt> until <tt>getData()</tt> either returns <tt>null</tt> or throws <tt>TransmissionError</tt>;</li>
+<li>must print "error reading instrument" and return without attempting to read additional data if <tt>getData()</tt> raises <tt>TransmissionError</tt>;</li>
+<li>must call <tt>close()</tt> exactly once if the constructor executes successfully.</li>
+</ul>
+</p>
+
+<dir><pre>public void printData() {
+    // Create a DataStream object
+        
+    // Print each string returned by getData() until it returns null or
+    // throws TransmissionError
+    
+    // Close the DataStream exactly once
+}
+</pre></dir>
+</li>
+
+</ol>
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h2.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>

@@ -1,0 +1,117 @@
+<content for="title">CS 367 h1</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h1</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, Feb 7 (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h1 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h1 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>2/6/2014:</b> Correction: in Question 2, BadListException is an
+    <b>un</b>checked exception.</li>
+    <li><b>2/5/2014:</b> Handin directories have been created.</li>
+    <li><b>1/31/2014:</b> Homework assigned.</li>
+<!--
+    <li><b>1/31/2014:</b> Handin directories have NOT been created. Watch here for an announcement.</li>
+-->
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+    <li><p>Consider the following Java method that is intended to swap two elements in
+a <code>ListADT</code> instance.
+<pre><code>
+void swap(int i, int j, ListADT&lt;String&gt; myList) {
+    String s = myList.get(i);
+    myList.add(i, myList.get(j));
+    myList.add(j, s);
+}
+</code></pre></li>
+For example, if <code>myList</code> is ["A", "B", "C", "D", "E"], then
+<code>swap(1, 3, myList)</code> should change <code>myList</code> into ["A",
+"D", C", "B", "E"], but it doesn't work as intended.</p>
+
+<p><b>Part A: Trace the code</b> on the example input above by showing the
+contents of <code>myList</code> after each line of the <code>swap</code>
+method is executed.</p>
+
+<p><b>Part B: Rewrite the method</b> so that it
+behaves as described. You must leave the method signature unchanged. Your method
+must NOT return a new list. It must operate on the list instance passed in the
+<code>myList</code> parameter. You do not need to worry about input validation
+(i.e., you may assume that <code>i < j</code> are valid indices and
+<code>myList</code> is not <code>null</code>).</p>
+
+<li><p> Assume the following: 
+  <ul>
+    <li>The <tt>Iterator&lt;E&gt;</tt> interface is as discussed in lecture.</li> 
+    <!-- <li>The <tt>ListADT&lt;E&gt;</tt> interface is as discussed in lecture
+    including an <tt>iterator()</tt> method that returns an
+    <tt>Iterator&lt;E&gt;</tt>.</li> -->
+    <li>The <tt>ArrayList&lt;E&gt;</tt> class implements the
+    <tt>Iterable&lt;E&gt;</tt> and <tt>ListADT&lt;E&gt;</tt> interfaces.</li>
+    <li>The <tt>BadListException</tt> class is implemented as an <b>un</b>checked exception with a zero-argument constructor.</li>
+    <li>The items in a list can be compared with the <tt>equals</tt> method or the <tt>compareTo</tt> method.</li>
+  </ul></p>
+
+  <p><b>Complete the Java method</b> specified below, making use of iterators.
+  Assume this method is implemented in a main class.
+  To receive full credit, your solution:
+  <ul>
+  <li>must explicitly use  iterators for traversing lists </li>
+  <li>must <b>not</b> use the <tt>contains</tt> method</li>
+  <li>must not modify the contents of the parameter</li>
+  </ul>
+  </p>
+  
+<pre><code>
+public static &lt;E&gt; ArrayList&lt;E&gt; flatten(ArrayList&lt;ArrayList&lt;E&gt;&gt; myList) {
+// If myList is null, throw a BadListException.
+// If myList is empty, return a new empty list.
+// Otherwise create and return a new list that contains the objects contained in
+// any of the lists contained in myList, removing duplicate items. The order of
+// items in the returned list should be the same as the order in which they
+// first appear in the original list.
+// Recall null items are not allowed in ListADT instances.
+//
+// Example:   myList: [[A,B,C], [D,C,F], [A,E]]   result: [A,B,C,D,F,E]
+</code></pre>
+</li>
+</ol>
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be
+    a ".txt" file, not a ".doc" or other format) file, named
+    <b><tt>h1.txt</tt></b>, containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+
+</div>
+</content>

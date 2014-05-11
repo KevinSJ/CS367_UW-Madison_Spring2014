@@ -1,0 +1,305 @@
+<content for="title">CS 367 h7</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h7</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, Apr 4th (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h7 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h7 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>3/29/2014:</b> Do not use tab characters in your answers when drawing your tree for #3c and #3d. Tab characters can vary in width depending on editor settings. Use individual space characters instead.</li>
+    <li><b>3/29/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+<!-- QUESTION 1 -->
+<li><p><b>Answer the following questions</b> regarding the following data
+structures:
+<dir><pre><code>
+i.     9        ii.     3     iii.   4       iv.     5      v.   4
+      / \              /            /|\             / \         / \
+     7   8            2            3 4 5           3   7       3   2
+    /                /                            / \           \ /
+   6                1                            2   4           1
+</dir></pre></code>
+</p>
+<ol type="a">
+    <li>Which are valid trees? (List all correct answers.)</li>
+    <li>Which are valid binary trees?  (List all correct answers.)</li>
+    <li>Which are valid <a
+        href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Binary-Search-Trees/index.html">binary
+        search trees</a> (BSTs)? (List all correct answers.)</li>
+    <li>List the nodes of tree iv above in the order in which a pre-order
+    traversal would visit them.</li>
+    <li>List the nodes of tree iv above in the order in which a post-order
+    traversal would visit them.</li>
+    <li>List the nodes of tree iv above in the order in which an in-order
+    traversal would visit them.</li>
+    <li>List the nodes of tree iv above in the order in which a level-order
+    traversal would visit them.</li>
+</ol></li>
+<br>
+
+<!-- QUESTION 2 -->
+<li><p>Consider the following implementation of a node in a <a
+    href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Trees/repTrees.html">general
+    tree</a>:
+<dir><pre><code>
+class Treenode&lt;T&gt; {
+    // *** fields ***
+    private T data;
+    // assume ListADT&lt;E&gt; implements Iterable&lt;E&gt;
+    private ListADT&lt;Treenode&lt;T&gt;&gt; children;
+
+    // *** constructor ***
+    public Treenode(T d) {
+        data = d;
+        children = new LinkedList&lt;Treenode&lt;T&gt;&gt;(); //NOTE use of LinkedList
+    }
+
+    // *** accessors ***
+    public T getData() { return data; }
+    public ListADT&lt;Treenode&lt;T&gt;&gt; getChildren() { return children; }
+}
+</code></pre></dir>
+Note that you should assume <tt>ListADT&lt;E&gt;</tt> implements
+<tt>Iterable&lt;E&gt;</tt>.
+</p>
+
+<p><b>Complete the <tt>countLeaves()</tt> method</b> according to its
+specification. For full credit, your solution
+<ul>
+    <li>must not modify the tree;</li>
+    <li>must make efficient use of data structures (note <tt>LinkedList</tt>
+    is used to store child references); and</li>
+    <li>must not be more than 15 lines of code and may be fewer.</li>
+</ul>
+<dir><pre><code>
+// Returns the number of leaves in the tree rooted at n.
+// Precondition: n is not null.
+public static &lt;T&gt; int countLeaves(Treenode&lt;T&gt; n) {
+</code></pre></dir>
+</p>
+</li>
+<br>
+
+<!-- QUESTION 3 -->
+<li><p>Consider the following implementation of a binary tree node:
+<dir><pre><code>
+class BinaryTreenode<T> {
+    // *** fields ***
+    private T data;
+    private BinaryTreenode&lt;T&gt; leftChild;
+    private BinaryTreenode&lt;T&gt; rightChild;
+
+    // *** constructor ***
+    public BinaryTreenode(T d, BinaryTreenode&lt;T&gt; left, BinaryTreenode&lt;T&gt; right) {
+        data = d;
+        leftChild = left;
+        rightChild = right;
+    }
+
+    // *** accessors ***
+    public BinaryTreenode&lt;T&gt; getLeft() { return leftChild; }
+    public BinaryTreenode&lt;T&gt; getRight() { return rightChild; }
+
+    // *** mutators ***
+    public setLeft(BinaryTreenode&lt;T&gt; left) { leftChild = left; }
+    public setRight(BinaryTreenode&lt;T&gt; right) { rightChild = right; }
+}
+</code></pre></dir>
+Imagine that we are using this code as part of a larger program, and this
+larger program needs to save its state from time to time, or share its data with
+another program. In either case, we need to be able to save the structure of the
+tree in such a way that another program (or the same program at a later time) can
+reconstruct the tree exactly as it was. The process of converting a data
+structure into such a format is called <i>serialization</i>.</p>
+
+<p>Suppose we have an interface, <tt>Serializer&lt;T&gt;</tt>, which defines a means
+of serializing a single node. It has the following definition:
+<dir><pre><code>
+public interface Serializer&lt;T&gt; {
+    // Given a node, stores the node's data in a format that can later be
+    // reconstructed to recreate the node. Does NOT store child references.
+    public void serializeNode(BinaryTreenode&lt;T&gt; n);
+}
+</code></pre></dir>
+Any class which implements <tt>Serializer&lt;T&gt;</tt> provides a means of saving or
+transmitting a single <tt>BinaryTreenode&lt;T&gt;</tt> instance.</p>
+
+<p>Suppose we've implemented the following method:
+<dir><pre><code>
+// Serializes an individual node in the tree, recursively serializing
+// children in a pre-order traversal of the tree.
+public static &lt;T&gt; void serialize(BinaryTreenode&lt;T&gt; n, Serializer&lt;T&gt; serializer) {
+    serializer.serializeNode(n);
+    if (n != null) {
+        serialize(n.getLeft(), serializer);
+        serialize(n.getRight(), serializer);
+    }
+}
+</code></pre></dir>
+</p>
+<p>Suppose also we have written a class <tt>IntSerializer implements
+    Serializer&lt;Integer&gt;</tt> which serializes
+<tt>BinaryTreenode&lt;Integer&gt;</tt> instances. The <tt>IntSerializer</tt> class
+simply prints out the data of each node, followed by a comma and a space, if the
+node is not <tt>null</tt>. If the node is <tt>null</tt>, it prints out
+<tt>null</tt>, followed by a comma and a space.  <tt>IntSerializer</tt> assumes
+that no data in the binary tree is <tt>null</tt>.</p>
+
+<p>For example, suppose the binary tree looks like this:
+<dir><pre><code>
+1
+ \
+  3
+ / \
+2   4
+</code></pre></dir>
+Then, if <tt>root</tt> is a reference to the root of this tree, serializing it
+using <tt>serialize(root, new IntSerializer())</tt> would produce the output:
+<dir><pre><code>
+1, null, 3, 2, null, null, 4, null, null, 
+</code></pre></dir>
+</p>
+
+<p><b>Answer the following questions</b> regarding the <tt>serialize()</tt>
+method and <tt>IntSerializer</tt> class.
+<ol type="a">
+    <li>What is the output of <tt>serialize(root, new IntSerializer())</tt> if
+    the tree looks like this?
+<dir><pre><code>
+  3
+ /
+1
+</code></pre></dir>
+    </li>
+    <li>What is the output of <tt>serialize(root, new IntSerializer())</tt> if
+    the tree looks like this?
+<dir><pre><code>
+  9
+ / \
+4   11
+ \
+  5
+</code></pre></dir>
+    </li>
+    <li>What tree structure would produce the following output? Show your
+    answer in the same format as (a) and (b) and do not use tab characters for spacing.
+<dir><pre><code>
+2, null, 4, null, null, 
+</code></pre></dir>
+    </li>
+    <li>What tree structure would produce the following output? Show your
+    answer in the same format as (a) and (b) and do not use tab characters for spacing.
+<dir><pre><code>
+2, 1, null, null, 4, 3, null, null, null, 
+</code></pre></dir>
+    </li>
+</ol>
+</li>
+<br>
+
+<!-- QUESTION 4 -->
+<li><p>The reverse of serialization is <i>deserialization</i>: given the
+serialized representation of the binary tree, reconstruct the original tree. In
+parts (c) and (d) of the previous question, you deserialized trees serialized by the
+<tt>serialize()</tt> method and <tt>IntSerializer</tt> class. In this problem,
+you will implement code to do this.</p>
+
+<p>First, we define the following interface:
+<dir><pre><code>
+public interface Deserializer&lt;T&gt; {
+    // Returns BinaryTreenode&lt;T&gt; instances in the order in which they were
+    // serialized (i.e., FIFO). The returned BinaryTreenode&lt;T&gt; instances
+    // have their left and right child references set to null.  Throws
+    // NoSuchElementException if called again after all serialized nodes have
+    // been returned.
+    public BinaryTreenode&lt;T&gt; deserializeNextNode();
+}
+</code></pre></dir>
+Suppose we've also written a class <tt>IntDeserializer implements
+    Deserializer&lt;Integer&gt;</tt> which is the complement to
+<tt>IntSerializer</tt> in the question above. Given the output of <tt>serialize(new
+    IntSerializer())</tt>, it returns <tt>BinaryTreenode&lt;Integer&gt;</tt>
+instances in the same order they were serialized. However, note that each
+returned node's child references are initialized to <tt>null</tt>; you will need
+to reconstruct the relationships between the nodes returned by
+<tt>IntDeserializer</tt>. For example, with an <tt>IntDeserializer</tt> instance
+instantiated with the output
+<dir><pre><code>
+1, null, 3, 2, null, null, 4, null, null, 
+</code></pre></dir>
+from the example in the previous question, subsequent calls to
+<tt>deserializeNextNode()</tt> would <i>effectively</i> iterate over the array
+<dir><pre><code>
+[new BinaryTreenode&lt;Integer&gt;(1, null, null),
+ null,
+ new BinaryTreenode&lt;Integer&gt;(3, null, null),
+ new BinaryTreenode&lt;Integer&gt;(2, null, null),
+ null,
+ null,
+ new BinaryTreenode&lt;Integer&gt;(4, null, null),
+ null,
+ null]
+</code></pre></dir>
+</p>
+
+<p>
+The <tt>deserialize()</tt> method has the following specification:
+<dir><pre><code>
+    // If the next node returned by the deserializer is null, returns null.
+    // Otherwise, returns the subtree rooted at that node, reconstructed
+    // recursively.
+    // Precondition: deserializer is not null.
+    private static &lt;T&gt; BinaryTreenode&lt;T&gt; deserialize(Deserializer&lt;T&gt; deserializer) {
+        // IMPLEMENT THIS
+</code></pre></dir>
+</p>
+
+<p><b>Complete the recursive <tt>deserialize()</tt> method.</b> Part of the
+grade for this question will be based on how well your recursive solution is
+coded. Your solution should not be more than 15 lines of code and may be
+fewer. You should NOT attempt to catch <tt>NoSuchElementException</tt>; a
+correct implementation will not cause <tt>deserializeNextNode()</tt> to throw
+<tt>NoSuchElementException</tt>. You do NOT need to implement
+<tt>IntDeserializer</tt>, which you should assume works as described above.</p></li>
+</ol>
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h7.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>

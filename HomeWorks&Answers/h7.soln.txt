@@ -1,0 +1,73 @@
+================================================================================
+1.
+    a. i. ii. iii. iv.
+
+    b. i. ii. iv.
+
+    c. ii. iv.
+
+    d. 5, 3, 2, 4, 7
+
+    e. 2, 4, 3, 7, 5
+
+    f. 2, 3, 4, 5, 7
+
+    g. 5, 3, 7, 2, 4
+
+
+================================================================================
+2.
+    public static <T> int countLeaves(Treenode<T> n) {
+        if (n.getChildren().isEmpty()) {
+            return 1;
+        }
+        int leaves = 0;
+        Iterator<Treenode<T>> itr = n.getChildren().iterator();
+        while (itr.hasNext()) {
+            leaves += countLeaves(itr.next());
+        }
+        return leaves;
+    }
+
+    //using Java's for-each loop
+    public static <T> int countLeaves(Treenode<T> n) {
+        if (n.getChildren().isEmpty()) {
+            return 1;
+        }
+        int leaves = 0;
+        for (Treenode<T> c : n.getChildren()) {
+            leaves += countLeaves(c);
+        }
+        return leaves;
+    }
+
+
+================================================================================
+3.
+    a. 3, 1, null, null, null, 
+
+    b. 9, 4, null, 5, null, null, 11, null, null
+
+    c.  2
+         \
+          4
+
+    d.    2
+         / \
+        1   4
+           /
+          3
+
+
+================================================================================
+4.
+    private static <T> BinaryTreenode<T> deserialize(Deserializer<T> 
+deserializer) {
+        BinaryTreenode<T> n = deserializer.deserializeNextNode();
+        if (n != null) {
+            n.setLeft(deserialize(deserializer));
+            n.setRight(deserialize(deserializer));
+        }
+        return n;
+    } 
+

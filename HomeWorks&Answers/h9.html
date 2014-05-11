@@ -1,0 +1,235 @@
+<content for="title">CS 367 h9</content>
+
+<content for="top">
+<h2>CS 367 Homework Assignment h9</h2>
+<font size="+1" color="#990000"><b>DUE by 10:00 PM on Friday, May 2nd (not accepted late)</b><br></font>
+
+<br>
+<a href="#Announcements">h9 Announcements</a> |
+<a href="#Questions">Questions</a> |
+<a href="#Submission">Submission</a>
+</content>
+
+<content for="main">
+
+<div class="announcements">
+
+  <a name="Announcements"></a>
+  <h2>h9 Announcements</h2>
+
+  <p>Corrections, clarifications, and other announcements regarding this homework assignment will be found below.</p>
+
+  <ul>
+    <li><b>4/25/2014:</b> Homework assigned.</li>
+  </ul>
+
+</div>
+<div>
+
+<a name="Questions"></a>
+<h2>Questions</h2>
+
+<ol>
+
+<!-- QUESTION 1 -->
+<li><p>Consider the following <i>directed</i> <a href="http://pages.cs.wisc.edu/~skrentny/cs367-common/readings/Graphs/index.html">graph</a>, which is
+given in adjacency list form:</p>
+<dir><pre>
+1 : 2, 5, 7
+2 : 3, 4, 5
+3 : 1
+4 : 3, 6
+5 : 8
+6 : 1, 4, 9
+7 : 2, 9
+8 : 6
+9 : 3
+</pre></dir>
+<p>(I.e., the first line says that the graph contains a directed edge from node
+1 to node 2, an edge from 1 to 5, and so on.)</p>
+
+<p><b>Part A:</b>
+<ol type="i">
+    <li>Show the order that nodes are visited for breadth-first search
+    on the graph above starting at 1 and visiting successors in increasing
+    numerical order (i.e., follow the CS 367 conventions).
+<!--
+ (e.g., if a node has edges to vertices 3, 7, and 9, your search should visit
+    node 3 before 7 and 7 before 9).
+-->
+    </li>
+    <li>Give the corresponding BFS spanning tree in adjacency list form.</li>
+</ol></p>
+
+<p><b>Part B:</b>
+<ol type="i">
+    <li>Repeat part A but for depth-first search, again visiting successors in increasing numerical order.</li>
+    <li>Give the corresponding DFS spanning tree in adjacency list form.</li>
+</li>
+</ol></p>
+<br>
+
+<!-- QUESTION 2 -->
+<li><p>Consider the following directed acyclic graph (DAG) given in adjacency
+matrix form:</p>
+<dir><pre>
+     1 2 3 4 5 6
+   +------------
+ 1 | 0 0 0 0 1 0
+ 2 | 0 0 0 0 1 0
+ 3 | 1 0 0 1 0 1
+ 4 | 1 1 0 0 0 0
+ 5 | 0 0 0 0 0 0
+ 6 | 1 0 0 0 0 0
+</pre></dir>
+<p>(I.e., the third row says there is a directed edge from node 3 to node 1,
+from 3 to 4, and so on.)</p>
+<p><b>Give a topological numbering</b> of the nodes in the above graph.</p>
+</li>
+<br>
+
+<!-- QUESTION 3 -->
+<li>
+<p>Suppose you're writing a program that handles images, perhaps a photo
+editing program or a robotic vision system. We can represent an image as a 2D
+array of pixels, where each element of the array gives the color of the pixel at
+that location. For simplicity, we will assume that we are working with
+black-and-white images. In this case, each pixel can be specified by a single
+<tt>double</tt> value that gives the <i>intensity</i> of that pixel: if the
+intensity of a pixel is 0.0, it is completely black, and if it is 1.0, it is
+completely white. (Intensities are always between 0.0 and 1.0, inclusive.)</p>
+
+<p>For example, the following array represents an image that is completely
+white on the left, gray in the middle, and completely black on the right:</p>
+<dir><pre>
+                 Columns
+        0    1    2    3    4    5
+     +-----------------------------
+   0 |1.00 1.00 0.50 0.50 0.00 0.00 
+R    |
+o  1 |1.00 1.00 0.50 0.50 0.00 0.00 
+w    |
+s  2 |1.00 1.00 0.50 0.50 0.00 0.00 
+     |
+   3 |1.00 1.00 0.50 0.50 0.00 0.00 
+  
+</pre></dir>
+<p>Note that indexing starts at (0,0) in the upper-left corner of the image, and
+is specified as (<i>row</i>, <i>column</i>). The <i>height</i> of the image is
+the number of rows and the <i>width</i> of the image is the number of columns.
+In this example, the height is 4 and the width is 6.</p>
+
+<p>Your task is to find contiguous regions within the image. This might be
+useful in a photo editing program to allow a user to click on an object, say a
+white ball on a gray background, and have the program select the entire ball but
+none of the background. Or it might be useful in a vision system to identify the
+shape of obstacles or recognize characters in text. We will call such contiguous
+regions <i>segments</i>.</p>
+
+<p>Define segments as follows. A set of pixels is a segment if for each pixel in
+the set there is a path (a sequence of pixels neighboring each other) to each
+other pixel in the segment such that each pixel in the path is also in the
+segment. At each step on the path, the difference between the intensity of one
+pixel on the path and the intensity of the next pixel on that path must be at
+most some threshold.  The neighbors of a pixel are the four pixels immediately
+above, below, left, and right.</p>
+
+<p>For example, the following image has two segments when the threshold is
+0.1:</p>
+<dir><pre>
+     0    1  
+  +---------
+ 0|1.00 0.00 
+  |
+ 1|0.90 0.80 
+</pre></dir>
+<p>The first segment contains the three pixels at (0,0), (1,0), and (1,1). The
+second segment contains the black pixel at (0,1). If the threshold is set to
+1.0, all pixels are in one segment; if the threshold is 0.05, each pixel is in
+its own segment. Note that if the pixels at (1,0) and (1,1) were swapped, the
+image would have three segments for any threshold less than 0.2 and at least
+0.1, because (0,0) and (1,1) are not neighbors.</p>
+
+<p>The program you're working on represents images using <tt>Image</tt> and
+<tt>Pixel</tt> classes, which have the following (partial) implementations:</p>
+<dir><pre><code>
+
+// Represents an individual pixel in the image.
+public class Pixel {
+    // Returns the row of this pixel as an int. Rows are indexed from zero,
+    // starting at the top of the image.
+    public int getRow() { ... }
+    
+    // Returns the column of this pixel as an int. Columns are indexed from
+    // zero, starting on the left of the image.
+    public int getCol() { ... }
+    
+    // Returns the intensity of this pixel as a double. The intensity is always
+    // between 0.0 and 1.0, inclusive.
+    public double getIntensity() { ... }
+    
+    // Returns an array of this pixel's neighbors. The length of the array is
+    // between 2 and 4: pixels on the edges of the image have three neighbors
+    // and pixels in the corners have two neighbors. Neighbors are not
+    // guaranteed to be returned in any particular order.
+    public Pixel[] getNeighbors() { ... }
+}
+
+
+// Represents an image as a collection of Pixel objects.
+public class Image {
+    // Array of pixels in the image. pixelData[r][c] is the Pixel object
+    // representing the pixel at row r and column c.
+    private Pixel[][] pixelData;
+
+    // The width and height of this image.
+    private int width, height;
+
+    // ...
+
+    // Returns the segment of the image containing the pixel at (row,col) using
+    // threshold. 
+    // Preconditions: 0 &lt;= row &lt; height, 0 &lt;= col &lt; width,
+    // 0.0 &lt;= threshold &lt;= 1.0
+    public Set&lt;Pixel&gt; getSegment(int row, int col, double threshold) {
+        // IMPLEMENT THIS
+    }
+}
+</code></pre></dir>
+<p>See also Java's <tt><a href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a></tt> interface.</p>
+<p><b>Implement <tt>getSegment</tt>.</b> In order to receive full credit, your
+implementation
+<ul>
+    <li>must not modify the <tt>Pixel</tt> or <tt>Image</tt> class, except the
+    body of <tt>getSegment</tt>;</li>
+    <li>must use only primitive types, arrays (including 2D arrays),
+    <tt>Pixel</tt> objects, <tt>LinkedList</tt> objects, or <tt><a href="http://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html">HashSet</a></tt>
+    objects;</li>
+    <li>may NOT include any helper methods;</li>
+    <li>must NOT be recursive; and
+    <li>must be at most 40 lines, and may be fewer.</li>
+</ul></p>
+<p><i>Hint:</i> you may find Java's
+<tt><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Math.html#abs(double)">Math.abs()</a></tt>
+method helpful.</p>
+</li>
+</ol>
+
+
+</div>
+<div>
+
+<a name="Submission"></a>
+<h2>Submitting Your Work</h2>
+
+    <p><a href="?r=coursework#Handin">Electronically submit</a> to your
+    <b><tt>in</tt></b> "handin" directory a plain-text (i.e., should be a ".txt"
+ file, not a ".doc" or other format) file,
+    named <b> <tt>h9.txt</tt></b>,  containing your answers.</p>
+
+    <p><b>Credit is only given for work in the correct format with the
+    correct file name that is submitted by the deadline.</b> You do not need
+    to include the question in your answer, but you are welcome to if
+    you wish.</p>
+</div>
+</content>
